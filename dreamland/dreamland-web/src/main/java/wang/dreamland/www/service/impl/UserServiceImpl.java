@@ -1,0 +1,65 @@
+package wang.dreamland.www.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import wang.dreamland.www.dao.UserMapper;
+import wang.dreamland.www.entity.User;
+import wang.dreamland.www.service.UserService;
+
+/**
+ * @Author: 徐杰
+ * @Date: 2019/5/4 0004 23:16
+ */
+@Service
+public class UserServiceImpl implements UserService{
+    /*@Autowired 注解注入 UserMapper 对象*/
+    @Autowired
+    private UserMapper userMapper;
+
+    @Override
+    public int regist(User user) {
+        return userMapper.insert(user);
+    }
+
+    @Override
+    public User login(String name, String password) {
+        User user = new User();
+        user.setEmail(name);
+        user.setPassword(password);
+        return userMapper.selectOne(user);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        User user = new User();
+        user.setEmail(email);
+        return userMapper.selectOne( user );
+    }
+
+    @Override
+    public User findByPhone(String phone) {
+        User user = new User();
+        user.setPhone(phone);
+        return userMapper.selectOne(user);
+    }
+
+    @Override
+    public User findById(Long id) {
+        User user = new User();
+        user.setId(id);
+        return userMapper.selectOne(user);
+    }
+
+    @Override
+    public void deleteByEmail(String email) {
+        User user = new User();
+        user.setEmail( email );
+        userMapper.delete( user );
+
+    }
+
+    @Override
+    public void update(User user) {
+        userMapper.updateByPrimaryKeySelective( user );
+    }
+}
