@@ -4,20 +4,13 @@ import wang.dreamland.www.common.PageHelper;
 import wang.dreamland.www.entity.Comment;
 import wang.dreamland.www.entity.UserContent;
 
+import java.util.List;
+
 /**
  * @Author: 徐杰
- * @Date: 2019/5/4 0004 22:15
+ * @Date: 2019/5/4 0005 20:59
  */
 public interface UserContentService {
-    /*根据主表id查询实体*/
-    public UserContent findById(Long id);
-
-    /*删除实体*/
-    public void deleteById(Long id);
-
-    /*更新实体*/
-    public void update(UserContent userContent);
-
     /**
      * 查询所有Content并分页
      * @param content
@@ -28,4 +21,36 @@ public interface UserContentService {
     PageHelper.Page<UserContent> findAll(UserContent content, Integer pageNum, Integer pageSize);
     PageHelper.Page<UserContent> findAll(UserContent content, Comment comment, Integer pageNum, Integer pageSize);
     PageHelper.Page<UserContent> findAllByUpvote(UserContent content, Integer pageNum, Integer pageSize);
+
+    /**
+     * 添加文章
+     * @param content
+     */
+    void addContent(UserContent content);
+
+    /**
+     * 根据用户id查询文章集合
+     * @param uid
+     * @return
+     */
+    List<UserContent> findByUserId(Long uid);
+
+    /**
+     * 查询所有文章
+     * @return
+     */
+    List<UserContent> findAll();
+
+    /**
+     * 根据文章id查找文章
+     * @param id
+     * @return
+     */
+    UserContent findById(long id);
+    /**
+     * 根据文章id更新文章
+     * @param content
+     * @return
+     */
+    void updateById(UserContent content);
 }

@@ -2,17 +2,32 @@ package wang.dreamland.www.service;
 
 import wang.dreamland.www.entity.LoginLog;
 
+import java.util.List;
+
 /**
  * @Author: 徐杰
- * @Date: 2019/5/4 0004 22:10
+ * @Date: 2019/5/4 0005 20:58
  */
 public interface LoginLogService {
-    /*根据主表id查询实体*/
-    public LoginLog findById(Long id);
+    /**
+     * 添加登录日志
+     * @param loginLog
+     * @return
+     */
+    int add(LoginLog loginLog);
 
-    /*删除实体*/
-    public void deleteById(Long id);
+    /**
+     * 查询所有日志
+     * @return
+     */
+    List<LoginLog> findAll();
 
-    /*更新实体*/
-    public void update(LoginLog loginLog);
+    /**
+     * 根据用户id查询日志集合
+     * @param uid
+     * @return
+     */
+    List<LoginLog> findByUid(Long uid);
+
+
 }

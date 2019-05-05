@@ -4,15 +4,33 @@ import wang.dreamland.www.entity.Upvote;
 
 /**
  * @Author: 徐杰
- * @Date: 2019/5/4 0004 22:14
+ * @Date: 2019/5/4 0005 20:59
  */
 public interface UpvoteService {
-    /*根据主表id查询实体*/
-    public Upvote findById(Long id);
+    /**
+     * 根据用户id和文章id查询
+     * @param upvote
+     * @return
+     */
+   Upvote findByUidAndConId(Upvote upvote);
 
-    /*删除实体*/
-    public void deleteById(Long id);
+    /**
+     * 添加upvote
+     * @param upvote
+     * @return
+     */
+   int add(Upvote upvote);
 
-    /*更新实体*/
-    public void update(Upvote upvote);
+    /**
+     * 根据用户id查询最后一次登录的Upvote
+     * @param upvote
+     * @return
+     */
+   Upvote getByUid(Upvote upvote);
+
+    /**
+     * 更新Upvote
+     * @param upvote
+     */
+   void update(Upvote upvote);
 }

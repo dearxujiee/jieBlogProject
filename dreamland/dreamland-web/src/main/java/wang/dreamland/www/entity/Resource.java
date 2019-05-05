@@ -1,6 +1,13 @@
 package wang.dreamland.www.entity;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /*资源表*/
 public class Resource {
+    @Id//标识主键
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //自增长策略
     private Long id;
 
     private String name;

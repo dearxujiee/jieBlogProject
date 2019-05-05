@@ -1,6 +1,13 @@
 package wang.dreamland.www.entity;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /*角色资源中间表*/
 public class RoleResource {
+    @Id//标识主键
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //自增长策略
     private Long id;
 
     private Long rId;

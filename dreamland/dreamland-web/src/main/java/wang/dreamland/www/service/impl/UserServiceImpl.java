@@ -8,32 +8,30 @@ import wang.dreamland.www.service.UserService;
 
 /**
  * @Author: 徐杰
- * @Date: 2019/5/4 0004 23:16
+ * @Date: 2019/5/4 0005 21:17
  */
 @Service
-public class UserServiceImpl implements UserService{
-    /*@Autowired 注解注入 UserMapper 对象*/
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    @Override
     public int regist(User user) {
-        return userMapper.insert(user);
+       return userMapper.insert(user);
     }
 
-    @Override
     public User login(String name, String password) {
         User user = new User();
-        user.setEmail(name);
-        user.setPassword(password);
-        return userMapper.selectOne(user);
+        user.setEmail( name );
+        user.setPassword( password );
+        return userMapper.selectOne( user );
+        //return userMapper.findUserByNameAndPwd( name,password );
     }
 
-    @Override
     public User findByEmail(String email) {
         User user = new User();
-        user.setEmail(email);
+        user.setEmail( email );
         return userMapper.selectOne( user );
+       // return userMapper.findByEmail(email);
     }
 
     @Override
@@ -50,15 +48,38 @@ public class UserServiceImpl implements UserService{
         return userMapper.selectOne(user);
     }
 
-    @Override
+    public User findByEmailActive(String email) {
+        User user = new User();
+        user.setEmail(email);
+        return userMapper.selectOne( user );
+        // return userMapper.findByEmail(email);
+    }
+
+    public User findById(String id) {
+        User user = new User();
+        Long uid = Long.parseLong( id );
+        user.setId(uid);
+        return userMapper.selectOne( user );
+    }
+
+    public User findById(long id) {
+        User user = new User();
+        user.setId(id);
+        return userMapper.selectOne( user );
+    }
+
     public void deleteByEmail(String email) {
         User user = new User();
         user.setEmail( email );
-        userMapper.delete( user );
-
+        userMapper.delete(user);
     }
 
-    @Override
+    public void deleteByEmailAndFalse(String email) {
+        User user = new User();
+        user.setEmail( email );
+        userMapper.delete( user );
+    }
+
     public void update(User user) {
         userMapper.updateByPrimaryKeySelective( user );
     }

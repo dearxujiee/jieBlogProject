@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Mybatis+Mysql 分页工具类
+ * @Author: 徐杰
+ * @Date: 2019/5/4 0004 23:08
+ * 分页工具类
  */
 @Intercepts({
 		@Signature(type = StatementHandler.class, method = "prepare", args = {

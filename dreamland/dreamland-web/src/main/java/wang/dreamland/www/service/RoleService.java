@@ -4,15 +4,20 @@ import wang.dreamland.www.entity.Role;
 
 /**
  * @Author: 徐杰
- * @Date: 2019/5/4 0004 22:12
+ * @Date: 2019/5/4 0005 20:59
  */
 public interface RoleService {
-    /*根据主表id查询实体*/
-    public Role findById(Long id);
+    /**
+     * 根据id查询角色
+     * @param id
+     * @return
+     */
+    Role findById(long id);
 
-    /*删除实体*/
-    public void deleteById(Long id);
-
-    /*更新实体*/
-    public void update(Role resource);
+    /**
+     * 添加角色
+     * @param role
+     * @return
+     */
+    int add(Role role);
 }

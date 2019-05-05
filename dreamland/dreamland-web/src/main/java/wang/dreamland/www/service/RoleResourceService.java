@@ -2,17 +2,38 @@ package wang.dreamland.www.service;
 
 import wang.dreamland.www.entity.RoleResource;
 
+import java.util.List;
+
 /**
  * @Author: 徐杰
- * @Date: 2019/5/4 0004 22:12
+ * @Date: 2019/5/4 0005 20:58
  */
 public interface RoleResourceService {
-    /*根据主表id查询实体*/
-    public RoleResource findById(Long id);
+    /**
+     * 添加roleRource
+     * @param roleResource
+     */
+    void add(RoleResource roleResource);
 
-    /*删除实体*/
-    public void deleteById(Long id);
+    /**
+     * 根据id查询RoleResource
+     * @param id
+     * @return
+     */
+    RoleResource findById(Long id);
 
-    /*更新实体*/
-    public void update(RoleResource roleResource);
+    /**
+     * 根据角色id查询角色资源集合
+     * @param rid
+     * @return
+     */
+    List<RoleResource> findByRoleId(Long rid);
+
+    /**
+     * 根据id删除RoleResource
+     * @param id
+     */
+    void deleteById(Long id);
+
+
 }

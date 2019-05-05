@@ -4,29 +4,54 @@ import wang.dreamland.www.entity.User;
 
 /**
  * @Author: 徐杰
- * @Date: 2019/5/4 0004 22:02
+ * @Date: 2019/5/4 0005 20:59
  */
 public interface UserService {
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     */
+    int regist(User user);
 
-    /*用户注册*/
-    public int regist(User user);
+    /**
+     * 用户登录
+     * @param email
+     * @param password
+     * @return
+     */
+    User login(String email,String password);
 
-    /*用户登录*/
-    public User login(String name, String password);
+    /**
+     * 根据用户邮箱查询用户
+     * @param email
+     * @return
+     */
+    User findByEmail(String email);
 
-    /*根据email查询用户*/
-    public User findByEmail(String email);
+    /**
+     * 根据用户手机号查询用户
+     * @param phone
+     * @return
+     */
+    User findByPhone(String phone);
 
-    /*根据电话号查询用户*/
-    public User findByPhone(String phone);
+    /**
+     * 根据用户id查询用户
+     * @param id
+     * @return
+     */
+    User findById(Long id);
 
-    /*根据主表id查询实体*/
-    public User findById(Long id);
+    /**
+     * 根据用户邮箱删除用户
+     * @param email
+     */
+    void deleteByEmail(String email);
 
-    /*删除实体*/
-    public void deleteByEmail(String email);
-
-    /*更新实体*/
-    public void update(User user);
-
+    /**
+     * 更新用户信息
+     * @param user
+     */
+    void update(User user);
 }
