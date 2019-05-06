@@ -12,8 +12,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <link type="text/css" rel="stylesheet" href="${ctx}/css/dreamland.css">
-    <script type="text/javascript" src="webapp/js/jquery.min.js"></script>
-    <script type="text/javascript" src="webapp/images/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${ctx}/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${ctx}/images/lib/js/jquery.min.js"></script>
+    <script type="text/javascript" src="${ctx}/js/jquery-1.10.2.js"></script>
 </head>
 
 <body class="login_bj" style="background-color: grey">
@@ -90,7 +91,7 @@
 
     //更换验证码
     function changeCaptcha() {
-        $("#captchaImg").attr('src', 'wang.dreamland.www.common.CodeCaptchaServlet?t=' + (new Date().getTime()));
+        $("#captchaImg").attr('src', '${ctx}/captchaServlet?t=' + (new Date().getTime()));
     }
 
     //根据内容增加而增加高度
