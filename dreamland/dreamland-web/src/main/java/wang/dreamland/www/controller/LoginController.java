@@ -13,6 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import wang.dreamland.www.common.CodeCaptchaServlet;
 import wang.dreamland.www.common.Constants;
 import wang.dreamland.www.common.MD5Util;
+import wang.dreamland.www.common.StringUtil;
 import wang.dreamland.www.entity.User;
 import wang.dreamland.www.service.UserService;
 
@@ -31,7 +32,7 @@ public class LoginController extends BaseController {
     private UserService userService;
 
     @RequestMapping("/doLogin")
-    public String doLogin(Model model, @RequestParam(value = "username", required = false) String email,
+    public String doLogin(Model model, @RequestParam(value = "email", required = false) String email,
                           @RequestParam(value = "password", required = false) String password,
                           @RequestParam(value = "code", required = false) String code,
                           @RequestParam(value = "state", required = false) String state,
@@ -51,7 +52,7 @@ public class LoginController extends BaseController {
         }
         password = MD5Util.encodeToHex(Constants.SALT + password);
         /*根据email和password判断*/
-        User user = userService.login(email, password);
+        User user = userService.login(StringUtil.safeToString(email,""), StringUtil.safeToString(password,""));
         if (user != null) {
             if ("0".equals(user.getState())) {
                 //未激活
@@ -80,49 +81,6 @@ public class LoginController extends BaseController {
             return 0;
         }
         return 1;
-    }
-
-    @RequestMapping("/checkLoginCode")
-    @ResponseBody
-    public Map<String, Object> checkLoginCode(Model model, @RequestParam(value = "code", required = false) String code) {
-        log.debug("注册-判断验证码" + code + "是否可用");
-        Map map = new HashMap<String, Object>();
-        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        /*通过 session.getAttribute 方法获取之前生成验证码时存入 session 中的验证码，赋值给 vcode
-        * 存入session的地方是在加载注册界面时调用的CodeCaptchaServlet工具类*/
-        String vcode = (String) attrs.getRequest().getSession().getAttribute(CodeCaptchaServlet.VERCODE_KEY);
-        /*判断前台传来的验证码和 Session 中存入的验证码是否相同。如果相同则代表验证码输入正确*/
-        if (code.equals(vcode)) {
-            map.put("message", "success");
-        } else {
-            map.put("message", "fail");
-        }
-
-        return map;
-    }
-
-    /**
-     * 判断邮箱是否已经被注册
-     *
-     * @param model
-     * @param email
-     * @return
-     */
-    @RequestMapping("/checkLoginEmail")
-    @ResponseBody
-    public Map<String, Object> checkLoginEmail(Model model, @RequestParam(value = "email", required = false) String email) {
-        log.debug("注册-判断邮箱" + email + "是否存在");
-        Map map = new HashMap<String, Object>();
-        User user = userService.findByEmail(email);
-        if (user == null) {
-            //未注册
-            map.put("message", "fail");
-        } else {
-            //已注册
-            map.put("message", "success");
-        }
-
-        return map;
     }
 
 }
